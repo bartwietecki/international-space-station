@@ -1,5 +1,7 @@
 import api.locationApi;
 
+package org;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.Connection;
