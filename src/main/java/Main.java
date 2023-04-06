@@ -1,7 +1,5 @@
 import api.locationApi;
 
-package org;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.Connection;
@@ -28,7 +26,7 @@ public class Main {
         final Connection connection = DriverManager.getConnection(JDBC_URL + System.getenv(DB_NAME_ENV),
                 System.getenv(DB_USER_ENV), System.getenv(DB_PASSWORD_ENV));
 
-        issApiConnection.connect();
+        //issApiConnection.connect();
 
         locationApi.getCurrentLocation();
      }
