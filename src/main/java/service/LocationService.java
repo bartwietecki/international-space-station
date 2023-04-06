@@ -1,8 +1,8 @@
-package org.service;
+package service;
 
-import org.dto.SimpleLocationDto;
-import org.entity.Location;
-import org.repository.LocationRepository;
+import dto.SimpleLocationDto;
+import entity.Location;
+import repository.LocationRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;

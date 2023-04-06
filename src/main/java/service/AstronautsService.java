@@ -1,8 +1,8 @@
-package org.service;
+package service;
 
-import org.dto.SimpleAstronautsDto;
-import org.entity.Astronauts;
-import org.repository.AstronautsRepository;
+import dto.SimpleAstronautsDto;
+import entity.Astronauts;
+import repository.AstronautsRepository;
 
 import java.util.List;
 import java.util.Set;
