@@ -1,8 +1,8 @@
-package org.repository;
+package repository;
 
 import jakarta.persistence.EntityManager;
-import org.DbConnection;
-import org.entity.Astronauts;
+import db.DbConnection;
+import entity.Astronauts;
 
 import java.util.HashSet;
 import java.util.List;
