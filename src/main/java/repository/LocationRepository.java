@@ -1,8 +1,8 @@
-package org.repository;
+package repository;
 
 import jakarta.persistence.EntityManager;
-import org.DbConnection;
-import org.entity.Location;
+import db.DbConnection;
+import entity.Location;
 
 import java.util.HashSet;
 import java.util.List;
