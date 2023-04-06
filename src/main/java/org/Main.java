@@ -1,7 +1,6 @@
-import api.locationApi;
+package org;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -20,15 +19,17 @@ public class Main {
     private static final Scanner SCANNER = new Scanner(System.in);
 
 
-    public static void main(String[] args) throws IOException, SQLException, URISyntaxException, InterruptedException {
+    public static void main(String[] args) throws IOException, SQLException {
         System.out.println("Going to connect to DB...");
 
         final Connection connection = DriverManager.getConnection(JDBC_URL + System.getenv(DB_NAME_ENV),
                 System.getenv(DB_USER_ENV), System.getenv(DB_PASSWORD_ENV));
 
-        issApiConnection.connect();
 
-        locationApi.getCurrentLocation();
+
+
+
+             issApiConnection.connect();
      }
 
 }
