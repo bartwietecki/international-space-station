@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,16 +22,21 @@ public class Location {
     private int id;
 
     @Column(name = "date")
+    @CreationTimestamp
     private LocalDateTime date;
 
     @Column(name = "longitude")
-    private double longitude;
+    private String longitude;
 
     @Column(name = "latitude")
-    private double latitude;
+    private String latitude;
 
-    public Location(LocalDateTime date, double longitude, double latitude) {
+    public Location(LocalDateTime date, String longitude, String latitude) {
         this.date = date;
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
+    public Location(String longitude, String latitude) {
         this.longitude = longitude;
         this.latitude = latitude;
     }

@@ -2,6 +2,8 @@ import api.astronautsApi;
 import dto.SimpleAstronautsDto;
 import repository.AstronautsRepository;
 import service.AstronautsService;
+import api.locationApi;
+import db.DbInitializer;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -30,7 +32,10 @@ public class Main {
         final Connection connection = DriverManager.getConnection(JDBC_URL + System.getenv(DB_NAME_ENV),
                 System.getenv(DB_USER_ENV), System.getenv(DB_PASSWORD_ENV));
 
-        //issApiConnection.connect();
+        DbInitializer dbInitializer = new DbInitializer(connection);
+        dbInitializer.initDb();
+
+        locationApi.getCurrentLocation();
 
 //        astronautsApi.getCurrentLocation();
 
