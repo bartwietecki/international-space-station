@@ -6,12 +6,7 @@ import dto.SimpleAstronautsDto;
 import entity.Astronauts;
 import repository.AstronautsRepository;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -47,25 +42,6 @@ public class AstronautsService {
                 .map(astronauts -> new SimpleAstronautsDto(astronauts.getId(),
                         astronauts.getName()))
                 .toList();
-    }
-
-    public void getAndSaveAstronauts() throws IOException, InterruptedException, URISyntaxException {
-        HttpRequest httpRequest = HttpRequest.newBuilder()
-                .uri(new URI("http://api.open-notify.org/astros.json"))
-                .build();
-
-        HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-
-        String responseBody = response.body();
-
-        // Parsing JSON using Gson library
-        Astronauts[] astronauts = gson.fromJson(responseBody, Astronauts[].class);
-
-        // Saving astronauts to DB
-        //        AstronautsRepository repository = new AstronautsRepository();
-        for (Astronauts astronaut : astronauts) {
-            astronautsRepository.insert(astronaut);
-        }
     }
 
     public void saveAstronautsFromResponse(HttpAstronautsResponseDto responseDto) {

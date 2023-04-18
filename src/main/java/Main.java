@@ -1,16 +1,17 @@
-import api.astronautsApi;
+import api.LocationApi;
+import db.DbInitializer;
+import repository.LocationRepository;
+import service.LocationService;
+import api.AstronautsApi;
+import db.DbInitializer;
 import dto.SimpleAstronautsDto;
 import repository.AstronautsRepository;
 import service.AstronautsService;
-import api.locationApi;
-import db.DbInitializer;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -35,33 +36,24 @@ public class Main {
         DbInitializer dbInitializer = new DbInitializer(connection);
         dbInitializer.initDb();
 
-        locationApi.getCurrentLocation();
+        LocationRepository locationRepository = new LocationRepository();
+        LocationService locationService = new LocationService(locationRepository);
 
-//        astronautsApi.getCurrentLocation();
-
-        System.out.println("HERE");
-
-        astronautsApi.getCurrentAstronauts();
+        locationService.saveLocationFromResponse(LocationApi.getCurrentLocationFromApi());
 
 
-//         metoda GetAndSaveAstronauts()
         AstronautsRepository astronautsRepository = new AstronautsRepository();
         AstronautsService astronautsService = new AstronautsService(astronautsRepository);
-
         try {
-            astronautsService.getAndSaveAstronauts();
+            astronautsService.saveAstronautsFromResponse(AstronautsApi.getCurrentAstronautsFromApi());
         } catch (Exception e) {
             System.err.println("Error while saving astronauts: " + e.getMessage());
         }
-
         List<SimpleAstronautsDto> astronautsList = astronautsService.findAll();
         for (SimpleAstronautsDto astronaut : astronautsList) {
             System.out.println(astronaut.getId() + " - " + astronaut.getName());
-
         }
-
-
-
-
     }
+
 }
+

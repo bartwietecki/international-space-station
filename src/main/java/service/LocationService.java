@@ -1,5 +1,7 @@
 package service;
 
+import dto.HttpLocationResponseDto;
+import dto.Iss_position;
 import dto.SimpleLocationDto;
 import entity.Location;
 import repository.LocationRepository;
@@ -34,4 +36,12 @@ public class LocationService {
                 .toList();
     }
 
+    public void saveLocationFromResponse(HttpLocationResponseDto httpLocationResponseDto) {
+
+        Iss_position iss_position = httpLocationResponseDto.getIss_position();
+        Location location = new Location(iss_position.getLatitude(), iss_position.getLongitude());
+
+        locationRepository.insert(location);
+
+    }
 }
