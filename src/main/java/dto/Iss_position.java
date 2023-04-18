@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Iss_positionDto {
+public class Iss_position {
     String latitude;
     String longitude;
 }

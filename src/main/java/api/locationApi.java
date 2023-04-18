@@ -1,6 +1,10 @@
 package api;
 
 import com.google.gson.Gson;
+import dto.HttpLocationResponseDto;
+import dto.Iss_position;
+import entity.Location;
+import repository.LocationRepository;
 
 import java.io.IOException;
 import java.net.URI;
@@ -22,5 +26,15 @@ public class locationApi {
         HttpResponse<String> getResponse = httpClient.send(getRequest, HttpResponse.BodyHandlers.ofString());
 
         System.out.println(getResponse.body());
+
+        HttpLocationResponseDto httpLocationResponseDto = gson.fromJson(getResponse.body(), HttpLocationResponseDto.class);
+
+        System.out.println(httpLocationResponseDto);
+        Iss_position iss_position = httpLocationResponseDto.getIss_position();
+        Location location = new Location(iss_position.getLatitude() ,iss_position.getLongitude());
+
+        final LocationRepository locationRepository = new LocationRepository();
+        locationRepository.insert(location);
+
     }
 }
