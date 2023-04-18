@@ -12,7 +12,7 @@ import java.net.http.HttpResponse;
 
 public class AstronautsApi {
 
-    public static void getCurrentAstronauts() throws IOException, InterruptedException, URISyntaxException {
+    public static HttpAstronautsResponseDto getCurrentAstronautsFromApi() throws IOException, InterruptedException, URISyntaxException {
 
         HttpRequest getRequest = HttpRequest.newBuilder()
                 .uri(new URI("http://api.open-notify.org/astros.json"))
@@ -24,9 +24,9 @@ public class AstronautsApi {
 
         System.out.println(getResponse.body());
 
-        HttpAstronautsResponseDto astronautsHttpResponseDto = gson.fromJson(getResponse.body(), HttpAstronautsResponseDto.class);
+        HttpAstronautsResponseDto httpAstronautsResponseDto = gson.fromJson(getResponse.body(), HttpAstronautsResponseDto.class);
 
-        System.out.println(astronautsHttpResponseDto);
+        return httpAstronautsResponseDto;
     }
 
 }

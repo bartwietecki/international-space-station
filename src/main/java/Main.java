@@ -2,7 +2,11 @@ import api.LocationApi;
 import db.DbInitializer;
 import repository.LocationRepository;
 import service.LocationService;
-
+import api.AstronautsApi;
+import db.DbInitializer;
+import dto.SimpleAstronautsDto;
+import repository.AstronautsRepository;
+import service.AstronautsService;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.Connection;
@@ -37,5 +41,19 @@ public class Main {
 
         locationService.saveLocationFromResponse(LocationApi.getCurrentLocationFromApi());
 
+
+        AstronautsRepository astronautsRepository = new AstronautsRepository();
+        AstronautsService astronautsService = new AstronautsService(astronautsRepository);
+        try {
+            astronautsService.saveAstronautsFromResponse(AstronautsApi.getCurrentAstronautsFromApi());
+        } catch (Exception e) {
+            System.err.println("Error while saving astronauts: " + e.getMessage());
+        }
+        List<SimpleAstronautsDto> astronautsList = astronautsService.findAll();
+        for (SimpleAstronautsDto astronaut : astronautsList) {
+            System.out.println(astronaut.getId() + " - " + astronaut.getName());
+        }
     }
+
 }
+
