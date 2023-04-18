@@ -1,17 +1,18 @@
-import api.LocationApi;
-import db.DbInitializer;
-import repository.LocationRepository;
-import service.LocationService;
 import api.AstronautsApi;
+import api.LocationApi;
 import db.DbInitializer;
 import dto.SimpleAstronautsDto;
 import repository.AstronautsRepository;
+import repository.LocationRepository;
 import service.AstronautsService;
+import service.LocationService;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
