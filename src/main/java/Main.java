@@ -1,17 +1,18 @@
-import api.LocationApi;
-import db.DbInitializer;
-import repository.LocationRepository;
-import service.LocationService;
 import api.AstronautsApi;
+import api.LocationApi;
 import db.DbInitializer;
 import dto.SimpleAstronautsDto;
 import repository.AstronautsRepository;
+import repository.LocationRepository;
 import service.AstronautsService;
+import service.LocationService;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -53,6 +54,16 @@ public class Main {
         for (SimpleAstronautsDto astronaut : astronautsList) {
             System.out.println(astronaut.getId() + " - " + astronaut.getName());
         }
+
+
+        System.out.println("HERE TEST for astronauts in space");
+
+        int numberOfAstronauts = astronautsService.getNumberOfCurrentAstronautsFromApi();
+        System.out.println("Liczba astronautów " + numberOfAstronauts);
+
+        System.out.println("Test again");
+        System.out.println(astronautsService.getNumberOfCurrentAstronautsFromApi());
+
     }
 
 }
