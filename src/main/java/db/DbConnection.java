@@ -7,7 +7,7 @@ import jakarta.persistence.Persistence;
 public class DbConnection {
 
     private static final EntityManagerFactory entityManagerFactory =  Persistence.createEntityManagerFactory
-            ("iss_spacestation");
+            ("iss_db");
 
     public static EntityManager getEntityManager() {
         return entityManagerFactory.createEntityManager();

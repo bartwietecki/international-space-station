@@ -10,7 +10,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class astronautsApi {
+public class AstronautsApi {
 
     public static void getCurrentAstronauts() throws IOException, InterruptedException, URISyntaxException {
 
