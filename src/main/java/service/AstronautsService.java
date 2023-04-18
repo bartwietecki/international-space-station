@@ -1,5 +1,6 @@
 package service;
 
+import api.AstronautsApi;
 import com.google.gson.Gson;
 import dto.HttpAstronautsResponseDto;
 import dto.SimpleAstronautsDto;
@@ -51,6 +52,16 @@ public class AstronautsService {
 
         for (Astronauts astronaut : astronauts) {
             astronautsRepository.insert(astronaut);
+        }
+    }
+
+    public int getNumberOfCurrentAstronautsFromApi()    {
+        try {
+            HttpAstronautsResponseDto responseDto = AstronautsApi.getCurrentAstronautsFromApi();
+            return responseDto.getNumber();
+        } catch (Exception e) {
+            System.err.println("Error while getting number of astronauts: " + e.getMessage());
+            return -1;
         }
     }
 
