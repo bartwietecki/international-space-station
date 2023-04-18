@@ -54,6 +54,16 @@ public class Main {
         for (SimpleAstronautsDto astronaut : astronautsList) {
             System.out.println(astronaut.getId() + " - " + astronaut.getName());
         }
+
+
+        System.out.println("HERE TEST for astronauts in space");
+
+        int numberOfAstronauts = astronautsService.getNumberOfCurrentAstronautsFromApi();
+        System.out.println("Liczba astronautów " + numberOfAstronauts);
+
+        System.out.println("Test again");
+        System.out.println(astronautsService.getNumberOfCurrentAstronautsFromApi());
+
     }
 
 }
