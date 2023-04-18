@@ -16,7 +16,7 @@ public class LocationService {
         this.locationRepository = locationRepository;
     }
 
-    public void addLocation(LocalDateTime date, double longitude, double latitude) throws IllegalArgumentException {
+    public void addLocation(LocalDateTime date, String longitude, String latitude) throws IllegalArgumentException {
         if (date != null) {
             Location location = new Location(date, longitude, latitude);
 
