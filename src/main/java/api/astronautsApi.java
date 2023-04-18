@@ -1,6 +1,7 @@
 package api;
 
 import com.google.gson.Gson;
+import dto.HttpAstronautsResponseDto;
 
 import java.io.IOException;
 import java.net.URI;
@@ -9,12 +10,12 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class locationApi {
+public class astronautsApi {
 
-    public static void getCurrentLocation() throws IOException, InterruptedException, URISyntaxException {
+    public static void getCurrentAstronauts() throws IOException, InterruptedException, URISyntaxException {
 
         HttpRequest getRequest = HttpRequest.newBuilder()
-                .uri(new URI("http://api.open-notify.org/iss-now"))
+                .uri(new URI("http://api.open-notify.org/astros.json"))
                 .build();
 
         Gson gson = new Gson();
@@ -22,5 +23,10 @@ public class locationApi {
         HttpResponse<String> getResponse = httpClient.send(getRequest, HttpResponse.BodyHandlers.ofString());
 
         System.out.println(getResponse.body());
+
+        HttpAstronautsResponseDto astronautsHttpResponseDto = gson.fromJson(getResponse.body(), HttpAstronautsResponseDto.class);
+
+        System.out.println(astronautsHttpResponseDto);
     }
+
 }

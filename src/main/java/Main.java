@@ -1,10 +1,14 @@
-import api.locationApi;
+import api.astronautsApi;
+import dto.SimpleAstronautsDto;
+import repository.AstronautsRepository;
+import service.AstronautsService;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -28,7 +32,32 @@ public class Main {
 
         //issApiConnection.connect();
 
-        locationApi.getCurrentLocation();
-     }
+//        astronautsApi.getCurrentLocation();
 
+        System.out.println("HERE");
+
+        astronautsApi.getCurrentAstronauts();
+
+
+//         metoda GetAndSaveAstronauts()
+        AstronautsRepository astronautsRepository = new AstronautsRepository();
+        AstronautsService astronautsService = new AstronautsService(astronautsRepository);
+
+        try {
+            astronautsService.getAndSaveAstronauts();
+        } catch (Exception e) {
+            System.err.println("Error while saving astronauts: " + e.getMessage());
+        }
+
+        List<SimpleAstronautsDto> astronautsList = astronautsService.findAll();
+        for (SimpleAstronautsDto astronaut : astronautsList) {
+            System.out.println(astronaut.getId() + " - " + astronaut.getName());
+
+        }
+
+
+
+
+    }
 }
+
