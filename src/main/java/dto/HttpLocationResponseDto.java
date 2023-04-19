@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class HttpLocationResponseDto {
-    String message;
-    String timestamp;
-    Iss_position iss_position;
+    private String message;
+    private String timestamp;
+    private Iss_position iss_position;
 }
