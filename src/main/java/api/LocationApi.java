@@ -22,8 +22,6 @@ public class LocationApi {
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpResponse<String> getResponse = httpClient.send(getRequest, HttpResponse.BodyHandlers.ofString());
 
-        System.out.println(getResponse.body());
-
         HttpLocationResponseDto httpLocationResponseDto = gson.fromJson(getResponse.body(), HttpLocationResponseDto.class);
 
         return httpLocationResponseDto;
