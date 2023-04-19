@@ -1,5 +1,3 @@
-import api.AstronautsApi;
-import api.LocationApi;
 import api.SatteliteApi;
 import db.DbInitializer;
 import repository.AstronautsRepository;
@@ -56,6 +54,7 @@ public class Main {
                     case 4:
                         System.out.print("Enter date (YYYY-MM-DD): ");
                         String inputDate = SCANNER.next();
+                        SatteliteApi.showPastLocationFromApi(inputDate);
                         break;
                     case 5:
                         isProgramRunning = false;
