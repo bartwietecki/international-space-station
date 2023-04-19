@@ -1,3 +1,6 @@
+import api.AstronautsApi;
+import api.LocationApi;
+import api.SatteliteApi;
 import db.DbInitializer;
 import repository.AstronautsRepository;
 import service.AstronautsService;
@@ -40,10 +43,11 @@ public class Main {
                 final int option = Integer.parseInt(userChoice);
                 switch (option) {
                     case 1:
-                        // Obliczanie prędkości ISS - metoda
+                        SatteliteApi.showCurrentSatteliteVelocity();
                         break;
                     case 2:
-                        // Pokazanie gdzie obecnie jest ISS - metoda
+                        // Nad jakim krajem jest ISS
+                        SatteliteApi.showCurrentSatteliteLocationFromApi();
                         break;
                     case 3:
                         int numberOfAstronauts = astronautsService.getNumberOfCurrentAstronautsFromApi();
