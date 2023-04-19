@@ -2,18 +2,14 @@ import api.AstronautsApi;
 import api.LocationApi;
 import api.SatteliteApi;
 import db.DbInitializer;
-import dto.SimpleAstronautsDto;
 import repository.AstronautsRepository;
-import repository.LocationRepository;
 import service.AstronautsService;
-import service.LocationService;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -37,8 +33,7 @@ public class Main {
         DbInitializer dbInitializer = new DbInitializer(connection);
         dbInitializer.initDb();
 
-
-        // -------------------------------------------------------------------------------
+        AstronautsService astronautsService = initializeAstronautsServiceFromRepository();
 
         boolean isProgramRunning = true;
         while (isProgramRunning) {
@@ -55,9 +50,14 @@ public class Main {
                         SatteliteApi.showCurrentSatteliteLocationFromApi();
                         break;
                     case 3:
-                        // Liczba osób w kosmosie - metoda
+                        int numberOfAstronauts = astronautsService.getNumberOfCurrentAstronautsFromApi();
+                        System.out.println("Number of astronauts in space: " + numberOfAstronauts);
                         break;
                     case 4:
+                        System.out.print("Enter date (YYYY-MM-DD): ");
+                        String inputDate = SCANNER.next();
+                        break;
+                    case 5:
                         isProgramRunning = false;
                         break;
                     default:
@@ -68,37 +68,6 @@ public class Main {
                 System.err.println(userChoice + "is invalid option. Please try again!");
             }
         }
-
-
-
-
-        // -------------------------------------------------------------------------------
-
-        LocationRepository locationRepository = new LocationRepository();
-        LocationService locationService = new LocationService(locationRepository);
-
-        locationService.saveLocationFromResponse(LocationApi.getCurrentLocationFromApi());
-
-        AstronautsRepository astronautsRepository = new AstronautsRepository();
-        AstronautsService astronautsService = new AstronautsService(astronautsRepository);
-        try {
-            astronautsService.saveAstronautsFromResponse(AstronautsApi.getCurrentAstronautsFromApi());
-        } catch (Exception e) {
-            System.err.println("Error while saving astronauts: " + e.getMessage());
-        }
-        List<SimpleAstronautsDto> astronautsList = astronautsService.findAll();
-        for (SimpleAstronautsDto astronaut : astronautsList) {
-            System.out.println(astronaut.getId() + " - " + astronaut.getName());
-        }
-
-        System.out.println("HERE TEST for astronauts in space");
-
-        int numberOfAstronauts = astronautsService.getNumberOfCurrentAstronautsFromApi();
-        System.out.println("Liczba astronautów " + numberOfAstronauts);
-
-        System.out.println("Test again");
-        System.out.println(astronautsService.getNumberOfCurrentAstronautsFromApi());
-
     }
 
     private static void showMenu() {
@@ -107,9 +76,16 @@ public class Main {
         System.out.println("1. Calculate ISS velocity");
         System.out.println("2. Return a list of upcoming ISS passes for a specified location");
         System.out.println("3. Return the number of astronauts in space withing the ISS");
-        System.out.println("4. Exit the ISS Tracker Program");
+        System.out.println("4. Check ISS position at a specific date");
+        System.out.println("5. Exit the ISS Tracker Program");
         System.out.print("Your choice: ");
     }
+
+    private static AstronautsService initializeAstronautsServiceFromRepository() {
+        AstronautsRepository astronautsRepository = new AstronautsRepository();
+        return new AstronautsService(astronautsRepository);
+    }
+
 
 }
 
